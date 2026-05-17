@@ -544,3 +544,71 @@ body {
     padding: 16px 44px;
   }
 }
+/* ===== 11. ACCESSIBILITY OVERLAYS & CONTROLS ===== */
+
+/* High-priority utility class that will change the whole app to grey scale */
+body.grayscale-mode {
+  filter: grayscale(100%) !important;
+}
+
+/* Floating control container in the top right corner */
+.accessibility-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 9999; /* Ensures it sits over the background gradient blobs */
+}
+
+/* Accessible button styling */
+.btn-accessibility {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--grey-light);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px); /* Modern frosted-glass effect */
+}
+
+.btn-accessibility:hover {
+  background: var(--white);
+  border-color: var(--pink);
+  transform: translateY(-1px);
+}
+
+.btn-accessibility svg {
+  width: 16px;
+  height: 16px;
+  color: var(--pink);
+}
+
+/* Active style state visual feedback */
+body.grayscale-mode .btn-accessibility {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
+}
+body.grayscale-mode .btn-accessibility svg {
+  color: var(--white);
+}
+
+/* Responsiveness fix: keeps the button neatly placed on tight screens */
+@media (max-width: 520px) {
+  .accessibility-controls {
+    top: 12px;
+    right: 12px;
+  }
+  .btn-accessibility span {
+    display: none; /* Hide the word 'Contrast' on small phones to save header space, keeping only the icon */
+  }
+  .btn-accessibility {
+    padding: 6px;
+  }
+}
