@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HerCycle — Period Tracker</title>
+  <link rel="stylesheet" href="homepage.css" />
+</head>
+<body>
+
+  <div class="app">
+    
+    <section class="screen blob-bg" id="screen-home">
+      <div class="hero">
+        <p class="hero-label" id="heroLabel">Next Period</p>
+        <h1 class="hero-title" id="heroTitle">9 Days Left</h1>
+        
+        <button class="btn-primary btn-pill-lg" id="periodToggle">Period Starts</button>
+        <!--sect container for homes screen
+           line 15 to let JS change text dynamically
+           line 18 identifies the button that toggle between
+           "Period Starts" and "Period Ends" -->
+        <div class="qa-card">
+          <div class="qa-icon" aria-hidden="true">
+            <span class="bubble bubble-q">Q</span>
+            <span class="bubble bubble-a">A</span>
+          </div>
+        <!-- Creates two overlapping circles (one Q, one A) 
+           that look like a conversation bubble. -->
+          <div class="qa-text">
+            <p class="qa-title"><strong>Too shy to ask?</strong> We got you <span class="heart-navy">♥</span></p>
+            <p class="qa-sub">Ask anonymously &amp; get support</p>
+            <button class="btn-primary btn-pill-sm" data-nav="community">Ask Now</button>
+        <!--  line 33 is a custom attribute.
+            When clicked, JavaScript reads data-nav and 
+            navigates to the community page --> 
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen blob-bg hidden" id="screen-community">
+      <h1 class="page-title">Community</h1>
+      
+      <div class="ask-card">
+        <form class="ask-row" id="askForm">
+          <input type="text" id="askInput" class="ask-input" placeholder="Ask anything anonymously..." />
+          <button type="submit" class="btn-primary btn-pill-md">Submit</button>
+        </form>
+        <!-- line 42 screen is INVISIBLE at the start
+           form with line 46 when u type a question and click
+           Submit, JS captures it
+           placeholder shows gray hint text inside the input box -->
+        <p class="ask-note">
+          <svg class="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          All questions are anonymous &amp; respectful answers are encouraged
+        </p>
+      </div>
+      
+      <div class="feed" id="feed"></div>
+      <!-- this div starts EMPTY. JS will fill it with all the
+         question posts -->
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-nav="home">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>
+        <span>Home</span>
+      </button>
+      <!-- line 69 tells JS "when clicked, go to homescreen
+         svg tags are ICONS
+         line 69 makes the Home button pink initially-->
+      <button class="nav-item" data-nav="calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+        <span>Calendar</span>
+      </button>
+      
+      <button class="nav-item" data-nav="selfcare">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+        <span>Self-care</span>
+      </button>
+      
+      <button class="nav-item" data-nav="profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+        <span>Profile</span>
+      </button>
+    </nav>
+    
+  </div>
+
+  <script src="homepage.js"></script>
+</body>
+</html>

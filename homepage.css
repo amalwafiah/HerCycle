@@ -1,0 +1,546 @@
+/* ===== 1. CORE ELEMENT INITIALIZATIONS & VARIABLES ===== */
+* { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 
+/* means every single element removes all default margins
+   and padding from everything, and makes width
+   calculations include borders */
+
+/* Application color palette styles variables shortcuts definitions */
+:root {
+  --pink: #ec3a8e; 
+  --pink-soft: #fde2ee; 
+  --pink-tint: #fbd5e6;
+  --navy: #1f2a52; 
+  --cream: #fdf3df; 
+  --peach: #fde0c8; 
+  --rose: #f9c6d4;
+  --grey: #9aa1ad; 
+  --grey-light: #e6e8ec; 
+  --white: #fff;
+}
+/* :root creates COLOR VARIABLES (names that store colors),
+   Instead of typing #ec3a8e everywhere, you just type 
+   var(--pink). If you want to change the pink later, you
+   change it in ONE place. */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--navy);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+/* Sets the default text font, text color (navy blue), 
+   and background color (cream) for the entire page*/
+
+/* App window content size restrictions constraints */
+.app {
+  min-height: 100vh;
+  padding-bottom: 90px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global utility class to conceal components instantly */
+.hidden {
+  display: none !important;
+}
+
+/* ===== 2. DECORATIVE BACKGROUND BLOB GRAPHICS ===== */
+.blob-bg {
+  position: relative;
+  background: var(--cream);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Creates a decorative color blur blob element left-hand corner boundary */
+.blob-bg::before {
+  content: "";
+  position: absolute;
+  filter: blur(2px);
+  z-index: 0;
+  pointer-events: none;
+  width: 340px;
+  height: 260px;
+  background: var(--peach);
+  top: -60px;
+  left: -80px;
+  border-radius: 55% 45% 60% 40% / 55% 60% 40% 45%;
+}
+/* ::before creates an INVISIBLE ELEMENT inside .blob-bg.
+   The weird border-radius numbers create an organic, blob-like
+   shape instead of a perfect circle. This makes a soft 
+   peach-colored blur in the top-left corner for a feminine,
+   gentle aesthetic.*/
+
+/* Creates a decorative color blur blob element right-hand corner boundary */
+.blob-bg::after {
+  content: "";
+  position: absolute;
+  filter: blur(2px);
+  z-index: 0;
+  pointer-events: none;
+  width: 380px;
+  height: 300px;
+  background: var(--rose);
+  top: 40px;
+  right: -90px;
+  border-radius: 50% 50% 60% 40% / 60% 40% 60% 40%;
+  opacity: .85;
+}
+/* ::after creates an INVISIBLE ELEMENT inside .blob-bg.
+   The weird border-radius numbers create an organic, blob-like
+   shape instead of a perfect circle. This makes a soft 
+   rose-colored blur in the top-right corner for a feminine,
+   gentle aesthetic.*/
+
+.screen {
+  padding: 32px 20px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.screen > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== 3. HOME DASHBOARD HEADER BANNER LAYOUT ===== */
+.hero {
+  text-align: center;
+  padding: 60px 16px 0;
+}
+
+.hero-label {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 72px;
+  line-height: 1;
+  font-weight: 700;
+  margin: 6px 0 48px;
+}
+/*  The big "9 Days Left" text. It uses a fancy serif font
+    (Playfair Display) that looks elegant. line-height: 1 
+    means no space between lines of text. */
+
+/* ===== 4. SYSTEM INTERFACE BUTTON TYPES ===== */
+.btn-primary {
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform .15s, background .15s;
+}
+/* all primary buttons are pink with white text
+   transition means changes happen smoothly over 0.15 sec */
+
+.btn-primary:hover {
+  background: #d6307d;
+  transform: translateY(-1px);
+}
+/* :hover means when mouse is over the button, it gets
+    darker pink and moves up 1 pixel (gives a "button press"
+    feel) */
+.btn-pill-lg {
+  font-size: 24px;
+  padding: 18px 60px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(236, 58, 142, .25);
+}
+/* border-radius: 999px makes the button a PILL SHAPE 
+   (fully rounded ends). -lg means large, -md medium, 
+   -sm small.*/
+
+.btn-pill-md {
+  font-size: 15px;
+  padding: 12px 26px;
+  border-radius: 999px;
+}
+
+.btn-pill-sm {
+  font-size: 14px;
+  padding: 9px 22px;
+  border-radius: 999px;
+}
+
+/* ===== 5. QA ANONYMOUS PROMO CARD MODULE ===== */
+.qa-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 20px;
+  margin: 36px auto 0;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(31, 42, 82, .06);
+}
+/* Creates a white card with rounded corners. margin: 36px
+   auto 0 means "36px margin on top, auto on left/right 
+   (centers it), 0 on bottom".*/
+
+.qa-icon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+/* Creates speech bubble style appearance geometry constraints */
+.bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pink);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50% 50% 50% 10%;
+  width: 34px;
+  height: 34px;
+  font-size: 14px;
+}
+/* Creates a speech-bubble-like shape. The unusual 
+   border-radius makes one corner pointy like a speech 
+   bubble tail. */
+
+.bubble-q {
+  top: 0;
+  left: 0;
+}
+
+.bubble-a {
+  bottom: 0;
+  right: 0;
+  border-radius: 50% 50% 10% 50%;
+}
+
+.qa-title {
+  font-size: 15px;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.qa-sub {
+  font-size: 13px;
+  opacity: .7;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.qa-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.heart-navy {
+  color: var(--navy);
+}
+
+/* ===== 6. COMMUNITY PAGE WRAPPERS ===== */
+.page-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  margin: 8px 0 26px;
+  letter-spacing: -.5px;
+}
+
+/* Box housing input field to ask a question */
+.ask-card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 18px 18px 14px;
+  max-width: 760px;
+  margin: 0 auto 22px;
+  box-shadow: 0 6px 18px rgba(31, 42, 82, .06);
+}
+
+.ask-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ask-input {
+  flex: 1;
+  background: var(--pink-soft);
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.ask-input::placeholder {
+  color: #b9849c;
+}
+
+.ask-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--grey);
+  font-size: 13px;
+  margin-top: 10px;
+  padding-left: 6px;
+}
+
+.shield {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== 7. COMMUNITY POST FEED LIST ROWS ===== */
+.feed {
+  background: #fff;
+  border-radius: 22px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6px 22px;
+  box-shadow: 0 6px 18px rgba(31, 42, 82, .06);
+}
+
+.post {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--grey-light);
+}
+
+.post:last-child {
+  border-bottom: none;
+}
+/* Each question post gets a light gray line at the bottom.
+   :last-child says "if this is the last post, don't show 
+   the line".*/
+
+.post-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e9ebef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.post-author {
+  color: var(--grey);
+  font-size: 15px;
+}
+
+.post-q {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.meta-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--grey);
+  font-size: 14px;
+  padding: 0;
+}
+
+.meta-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.meta-btn.liked {
+  color: var(--pink);
+}
+
+.heart {
+  fill: var(--pink);
+  stroke: var(--pink);
+}
+
+.post-time {
+  margin-left: auto;
+  color: var(--grey);
+  font-size: 13px;
+}
+
+/* ===== 8. NESTED COMMENT ROWS SUB-SECTIONS ===== */
+.comments {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--grey-light);
+  display: none;
+}
+/* comments are HIDDEN by default (display: none means
+   invisible and takes no space) */
+.comments.open {
+  display: block;
+}
+/* when the class .open is added, they appear (display: block
+   ). THis creates the "click to expand comments" feature. */
+.comment {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.comment .avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.comment .avatar svg {
+  width: 32px;
+  height: 32px;
+}
+
+.comment-body {
+  background: #f6f7fa;
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.comment-author {
+  font-size: 12px;
+  color: var(--grey);
+  margin-bottom: 2px;
+}
+
+.comment-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.comment-input {
+  flex: 1;
+  border: 1px solid var(--grey-light);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  outline: none;
+  background: #fafbfc;
+}
+
+.comment-input:focus {
+  border-color: var(--pink);
+}
+
+.comment-send {
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== 9. FOOTER FIXED MENU DOCK LINK NAVIGATION BAR ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 16px 14px;
+  box-shadow: 0 -4px 20px rgba(31, 42, 82, .06);
+  z-index: 50;
+} /* position: fixed means the navigation bar STAYS AT THE
+     BOTTOM even when you scroll. It spans the full width 
+     (left: 0, right: 0)*/
+
+.nav-item {
+  flex: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  color: var(--navy);
+  font-size: 13px;
+  padding: 4px 8px;
+}
+
+.nav-item svg {
+  width: 28px;
+  height: 28px;
+}
+
+.nav-item.active {
+  color: var(--pink);
+}
+/* The active navigation button (the page you're on) turns
+   pink instead of navy.*/
+
+/* ===== 10. MOBILE DISPLAY RESPONSIVENESS ADJUSTMENTS ===== */
+@media (max-width: 520px) {
+  .hero-title {
+    font-size: 54px;
+  }
+  /* When the screen width is 520px or smaller (typical
+     phone), make the title smaller so it fits. This is 
+     called "responsive design". */
+  .page-title {
+    font-size: 32px;
+  }
+  .btn-pill-lg {
+    font-size: 20px;
+    padding: 16px 44px;
+  }
+}
