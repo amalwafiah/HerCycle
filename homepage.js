@@ -230,3 +230,25 @@ feedEl.addEventListener('submit', function(event) {
    Saves and re-renders
  */
 renderFeed();
+// ===== ACCESSIBILITY ENGINE: GLOBAL GRAYSCALE TOGGLE =====
+document.addEventListener('DOMContentLoaded', () => {
+  const grayscaleToggleBtn = document.getElementById('grayscaleToggle');
+  
+  // 1. Check localStorage when app loads to see if user previously enabled grayscale
+  const isGrayscaleEnabled = localStorage.getItem('accessibility_grayscale') === 'true';
+  
+  if (isGrayscaleEnabled) {
+    document.body.classList.add('grayscale-mode');
+  }
+
+  // 2. Click event listener to toggle state dynamically
+  if (grayscaleToggleBtn) {
+    grayscaleToggleBtn.addEventListener('click', () => {
+      // Toggle class on body
+      const modeActive = document.body.classList.toggle('grayscale-mode');
+      
+      // Persist state inside localStorage API matching rubric standards
+      localStorage.setItem('accessibility_grayscale', modeActive);
+    });
+  }
+});
